@@ -190,7 +190,8 @@ function update(req, res) {
         CategoryId: req.body.categoryId,
         updatedBy: req.body.updatedBy
     },{where: {
-        id : req.params.id
+        id : req.params.id,
+        status: true
     }
     }).then(function(product) {
         var result = resBase.resMessage(messages.ACKNOWLEDGE_TYPE.SUCCESS,messages.UPDATE_SUCCESS,product);
@@ -227,7 +228,8 @@ function remove(req, res) {
     models.Product.update({
         status: false
     },{where: {
-        id : req.params.id
+        id : req.params.id,
+        status: true
     }
     }).then(function(product) {
         var result = resBase.resMessage(messages.ACKNOWLEDGE_TYPE.SUCCESS,messages.DELETE_SUCCESS,product);

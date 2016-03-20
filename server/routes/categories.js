@@ -122,7 +122,7 @@ function create(req, res) {
         name: req.body.name,
         CategoryId: req.body.categoryId,
         status: true,
-        createdBy: req.body.createdBy,
+        createdBy: req.body.createdBy
     }).then(function(category) {
         var result = resBase.resMessage(messages.ACKNOWLEDGE_TYPE.SUCCESS,messages.INSERT_SUCCESS,category);
         logger.info(resBase.resLogMessage(baseReq.transId, result));
@@ -163,12 +163,13 @@ function update(req, res) {
     models.Category.update({
         name: req.body.name,
         CategoryId: req.body.categoryId,
-        updatedBy: req.body.updatedBy,
+        updatedBy: req.body.updatedBy
     },{where: {
-        id : req.params.id
+        id : req.params.id,
+        status: true
     }
     }).then(function(category) {
-        var result = resBase.resMessage(messages.ACKNOWLEDGE_TYPE.SUCCESS,messages.UPDATE_SUCCESS,category)
+        var result = resBase.resMessage(messages.ACKNOWLEDGE_TYPE.SUCCESS,messages.UPDATE_SUCCESS,category);
         logger.info(resBase.resLogMessage(baseReq.transId, result));
         res.status(messages.HTML_STATUS.SUCCESS).send(result);
     }).catch (function(e) {
@@ -202,7 +203,8 @@ function remove(req, res) {
     models.Category.update({
         status: false
     },{where: {
-        id : req.params.id
+        id : req.params.id,
+        status: true
     }
     }).then(function(category) {
         var result = resBase.resMessage(messages.ACKNOWLEDGE_TYPE.SUCCESS,messages.DELETE_SUCCESS,category);
