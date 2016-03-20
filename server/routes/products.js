@@ -105,8 +105,6 @@ function create(req, res) {
     var baseReq = reqBase.reqMessage();
     logger.info(JSON.stringify(reqBase.reqLogMessage(baseReq.transId, req)));
 
-    var myReq = reqBase.reqMessage();
-
     req.checkBody('sku', messages.FIELD_CANT_BE_EMPTY).notEmpty();
     req.checkBody('name', messages.FIELD_CANT_BE_EMPTY).notEmpty();
     req.checkBody('categoryId', messages.FIELD_CANT_BE_EMPTY).notEmpty();
@@ -137,7 +135,7 @@ function create(req, res) {
         color: req.body.color == '' ? null : req.body.color,
         CategoryId: req.body.categoryId,
         status: true,
-        createdBy: req.body.createdBy,
+        createdBy: req.body.createdBy
     }).then(function(product) {
         var result = resBase.resMessage(messages.ACKNOWLEDGE_TYPE.SUCCESS,messages.INSERT_SUCCESS,product);
         logger.info(resBase.resLogMessage(baseReq.transId, result));
@@ -158,8 +156,6 @@ function create(req, res) {
 function update(req, res) {
     var baseReq = reqBase.reqMessage();
     logger.info(JSON.stringify(reqBase.reqLogMessage(baseReq.transId, req)));
-
-    var myReq = reqBase.reqMessage();
 
     req.checkParams('id', messages.FIELD_CANT_BE_EMPTY).notEmpty();
     req.checkBody('sku', messages.FIELD_CANT_BE_EMPTY).notEmpty();
@@ -192,8 +188,7 @@ function update(req, res) {
         size: req.body.size == '' ? null : req.body.size,
         color: req.body.color == '' ? null : req.body.color,
         CategoryId: req.body.categoryId,
-        status: true,
-        updatedBy: req.body.updatedBy,
+        updatedBy: req.body.updatedBy
     },{where: {
         id : req.params.id
     }
@@ -217,8 +212,6 @@ function update(req, res) {
 function remove(req, res) {
     var baseReq = reqBase.reqMessage();
     logger.info(JSON.stringify(reqBase.reqLogMessage(baseReq.transId, req)));
-
-    var myReq = reqBase.reqMessage();
 
     req.checkParams('id', messages.FIELD_CANT_BE_EMPTY).notEmpty();
 
